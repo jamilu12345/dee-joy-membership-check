@@ -1,4 +1,168 @@
-<!doctype html><!doctype html>
+<!doctype HTML
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dee Joy Youth Political Mobilisation Forum — Membership Check</title>
+<style>
+:root {
+  --green:#075b2a;
+  --gold:#d8ad25;
+  --ink:#17221a;
+  --muted:#5d6b61;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:#f3f6f2;
+  color:var(--ink);
+  font:16px/1.5 Arial,sans-serif;
+}
+header {
+  background:linear-gradient(120deg,#06451f,#087a37);
+  color:white;
+  padding:28px 18px;
+  border-bottom:5px solid var(--gold);
+}
+.wrap { max-width:760px; margin:auto; padding:18px; }
+h1 { font-size:clamp(22px,5vw,32px); margin:0 0 8px; }
+header p { margin:0; color:#f4f4e9; }
+.card {
+  background:white;
+  border:1px solid #dce5dc;
+  border-radius:16px;
+  padding:22px;
+  margin:22px 0;
+  box-shadow:0 5px 18px #153b1b10;
+}
+label { display:block; font-weight:700; margin-bottom:8px; }
+input {
+  width:100%;
+  padding:14px;
+  border:1px solid #aebcaf;
+  border-radius:9px;
+  font-size:16px;
+}
+button {
+  margin-top:12px;
+  background:var(--green);
+  color:white;
+  border:0;
+  border-radius:9px;
+  padding:13px 18px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+.result {
+  margin-top:18px;
+  padding:16px;
+  border-radius:10px;
+  background:#f5f8f4;
+  border-left:5px solid var(--gold);
+}
+.row { margin:8px 0; }
+.key { font-weight:700; color:var(--muted); }
+.status {
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:20px;
+  background:#dff3e5;
+  color:#075b2a;
+  font-weight:700;
+}
+footer {
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  padding:10px 20px 30px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>DEE JOY YOUTH POLITICAL MOBILISATION FORUM</h1>
+    <p>Youth Mobilisation, Unity, Progress and Leadership</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card">
+    <h2>Membership verification</h2>
+    <p>Enter the membership number printed on the card to check the record held by the Forum.</p>
+
+    <label for="memberId">Membership number</label>
+    <input id="memberId" autocomplete="off"
+      placeholder="DJYPMF/SOK/2026/001">
+
+    <button type="button" onclick="verify()">Check membership</button>
+    <div id="result" aria-live="polite"></div>
+  </section>
+
+  <section class="card">
+    <h3>Important notice</h3>
+    <p>The membership records displayed on this page have been confirmed by the Forum. This page verifies the Forum's own membership records only; it is not proof of government registration, election authority accreditation, or independent legal recognition of the Forum.</p>
+  </section>
+</main>
+
+<footer>
+  Headquarters: Sokoto State, Nigeria · Contact details to be added by the Forum
+</footer>
+
+<script>
+const members = {
+  "DJYPMF/SOK/2026/001": {
+    name:"Jamilu Abdullahi",
+    position:"Founder/Coordinator",
+    state:"Sokoto State",
+    status:"CONFIRMED"
+  },
+  "DJYPMF/SOK/2026/002": {
+    name:"Abubakar Bello",
+    position:"Deputy Coordinator",
+    state:"Sokoto State",
+    status:"CONFIRMED"
+  }
+};
+
+function verify() {
+  const id = document.getElementById("memberId").value.trim().toUpperCase();
+  const m = members[id];
+  const out = document.getElementById("result");
+
+  if (!m) {
+    out.innerHTML = '<div class="result"><strong>No matching record found.</strong><br>Please check the number or contact the Forum.</div>';
+    return;
+  }
+
+  out.innerHTML = `
+    <div class="result">
+      <div class="row"><span class="key">Name:</span> ${m.name}</div>
+      <div class="row"><span class="key">Membership number:</span> ${id}</div>
+      <div class="row"><span class="key">Position:</span> ${m.position}</div>
+      <div class="row"><span class="key">State:</span> ${m.state}</div>
+      <div class="row"><span class="key">Record status:</span>
+        <span class="status">${m.status}</span>
+      </div>
+    </div>`;
+}
+
+const params = new URLSearchParams(location.search);
+const fromUrl = params.get("id");
+
+if (fromUrl) {
+  document.getElementById("memberId").value = fromUrl;
+  verify();
+}
+</script>
+
+</body>
+</html>
+ html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
